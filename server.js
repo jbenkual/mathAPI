@@ -6,6 +6,7 @@ var server = http.createServer(function(req, res) {
 
 	var data = req.url.split('/');
 	var op = data[2];
+	var defVal = (op === 'multiply' || op === 'divide');
 
 	var total = data.splice(3).reduce(function(total, num){
 		num = parseInt(num);
@@ -21,7 +22,7 @@ var server = http.createServer(function(req, res) {
 			default:
 				return num;
 		}
-	}, 0);
+	}, defVal);
 
 	res.write(total + "");
 
