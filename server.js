@@ -8,7 +8,13 @@ var server = http.createServer(function(req, res) {
 	var op = data[2];
 	var defVal = (op === 'multiply' || op === 'divide');
 
-	var total = data.splice(3).reduce(function(total, num){
+	var total = data.splice(3).reduce(function(total, num) {
+		if(num === 'add' || num == 'subtract' || num === 'multiply' || num === 'divide') {
+			op = num;
+			console.log(op);
+			return total;
+		}
+		console.log(num);
 		num = parseInt(num);
 		switch (op) {
 			case 'add':
@@ -25,9 +31,7 @@ var server = http.createServer(function(req, res) {
 	}, defVal);
 
 	res.write(total + "");
-
 	res.end();
-
 });
 
 
